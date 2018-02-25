@@ -1,0 +1,36 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Query {
+  users: [User]
+}
+
+type Mutation {
+  send(senderId: ID!, recverId: ID!, content: String!): Message
+  createUser(username: String, firstName: String, lastName: String): User
+}
+
+type Subscription {
+  onMessageCreate(recverId: ID): Message
+}
+
+type Message {
+  id: ID
+  senderId: ID
+  recverId: ID
+  content: String
+  sender: User
+  recver: User
+}
+
+type User {
+  id: ID
+  username: String
+  firstName: String
+  lastName: String
+  fullName: String
+  messages: [Message]
+}
